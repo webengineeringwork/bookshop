@@ -12,8 +12,10 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700">
 
     <!-- Styles -->
-    <link href="//cdn.shopify.com/s/files/1/0880/2454/t/2/assets/timber.scss.css?10061947258110571957" rel="stylesheet" type="text/css" media="all" />
-    <link href="//cdn.shopify.com/s/files/1/0880/2454/t/2/assets/theme.scss.css?10061947258110571957" rel="stylesheet" type="text/css" media="all" />
+    @if(Request::getPathInfo() != '/cart')
+        <link href="//cdn.shopify.com/s/files/1/0880/2454/t/2/assets/timber.scss.css?10061947258110571957" rel="stylesheet" type="text/css" media="all" />
+        <link href="//cdn.shopify.com/s/files/1/0880/2454/t/2/assets/theme.scss.css?10061947258110571957" rel="stylesheet" type="text/css" media="all" />
+    @endif
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     {{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> --}}
 
@@ -26,6 +28,24 @@
 
         .fa-btn {
             margin-right: 6px;
+        }
+
+        .searchform {
+            width: 50%;
+            margin: auto;
+            margin-top: 4%;
+            text-align: center;
+        }
+
+        .search-query {
+            width: 70%;
+            margin: auto;
+            border-color: #c0c0c0;
+            background: #ffffff;
+        }
+
+        #cart {
+            margin-bottom: 10%;
         }
     </style>
 </head>
@@ -71,6 +91,7 @@
                                 <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
                             </ul>
                         </li>
+                        <li><a href="{{ url('/cart') }}"><i class="fa fa-shopping-cart"></i></a></li>
                     @endif
                 </ul>
             </div>
@@ -84,26 +105,27 @@
     <!-- 尾部 -->
     <nav class="navbar navbar-default navbar-static-top">
         @section('footer')
-            <div class="jumbotron" style="margin:0;">
-                <div class="container">
-                    <span>  @2017 fenlan-fan  </span>
-                    <span> <a href="https://github.com/fenlan-fan">Github</a> </span>
-                </div>
-
-                <div class="container">
-                    <span> Project Developer </span>
-                    <span> <a href="https://github.com/fenlan">fenlan</a> </span>
-                    <span> <a href="https://github.com/fanzhonghao">fanzhonghao</a> </span>
-                </div>
-                <div class="container">
-                    <span> Reference </span>
-                    <span> <a href="https://www.shopbookshop.com/collections/books"> bookshop </a> </span>
-                </div>
+            <div class="jumbotron" style="margin:0;" align="center">
+                <blockquote class="blockquote">
+                    <p class="mb-0">
+                        <span>  @2017 fenlan-fan  </span>
+                        <span> <a href="https://github.com/fenlan-fan">Github</a></span>
+                    </p>
+                    <footer class="blockquote-footer">
+                        <span> Project Developer </span>
+                        <span> <a href="https://github.com/fenlan">fenlan</a> </span>
+                        <span> <a href="https://github.com/fanzhonghao">fanzhonghao</a> </span>
+                        <cite title="Source Title"><span> Reference </span>
+                            <span> <a href="https://www.shopbookshop.com/collections/books"> bookshop </a> </span>
+                        </cite>
+                    </footer>
+                </blockquote>
             </div>
         @show
     </nav>
 
     <!-- JavaScripts -->
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js" integrity="sha384-I6F5OKECLVtK/BL+8iSLDEHowSAfUo76ZL9+kGAgTRdiByINKJaqTPH/QVNS1VDb" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
     {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
