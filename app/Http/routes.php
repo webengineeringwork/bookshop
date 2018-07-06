@@ -17,6 +17,7 @@
 
 Route::any('/', 'BookController@welcome');
 Route::any('book/detail/{id}', 'BookController@detail');
+Route::get('book/search', 'BookController@search');
 
 
 /*
@@ -43,6 +44,7 @@ Route::group(['middleware' => ['web']], function () {
 Route::auth();
 
 Route::get('/home', 'HomeController@index');
+Route::any('/cart', 'HomeController@cart');
 Route::get('/Admin/home', 'AdminHomeController@index');
 Route::any('/Admin/book/detail/{id}', 'AdminHomeController@detail');
 Route::any('/Admin/book/create', 'AdminHomeController@create');
