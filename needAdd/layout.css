@@ -1,0 +1,10 @@
+#comment{
+    position: absolute;
+    left: 30%;
+    right: 30%;
+}
+#purchasedBook{
+    position: relative;
+    left: 20%;
+    width: 60%;
+}
