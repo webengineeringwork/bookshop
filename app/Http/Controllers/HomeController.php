@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Book;
+use App\Cart;
 use App\Http\Requests;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -27,8 +31,38 @@ class HomeController extends Controller
         return view('home');
     }
 
-    public function cart()
+    public function cart(Request $request)
     {
-        return view('user.cart');
+        if ($request->isMethod('POST')) {
+
+            $amounts = $request->input('amount');
+            $keys = array_keys($request->input('amount'));
+            foreach ($keys as $key) {
+
+                $cart = Cart::find($key);
+                $cart->amount = $amounts[$key];
+                $cart->save();
+            }
+        }
+        $total = 0;
+        $carts = DB::select('SELECT * FROM carts WHERE userID = ?', [Auth::user()->id]);
+
+        return view('user.cart', [
+            'carts' => $carts,
+            'total' => $total,
+        ]);
+    }
+
+    public function delete($id)
+    {
+        $cart = Cart::find($id);
+
+        if ($cart->delete()) {
+
+            return redirect('/cart');
+        } else {
+
+            return '删除失败';
+        }
     }
 }
